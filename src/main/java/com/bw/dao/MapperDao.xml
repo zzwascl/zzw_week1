@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.bw.dao.MapperDao">
+  	<select id="list" resultType="goods">
+select a.id,a.cname,a.price,a.pic,b.`name` bname,c.`name` tname from goods a
+LEFT JOIN brand b on a.bid=b.id
+LEFT JOIN type c on a.tid=c.id
+<where>
+	<if test="cname!=null and cname!=''">cname like '%${cname}%'</if>
+</where>  	
+  	</select>
+  	
+  	<insert id="add" >
+  		insert into goods values(null,#{cname},#{bid},#{tid},#{price},#{pic})
+  	</insert>
+  </mapper>
